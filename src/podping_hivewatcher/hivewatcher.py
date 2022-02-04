@@ -1,13 +1,14 @@
 import json
 import logging
-from datetime import datetime, timedelta
 import sys
+from datetime import datetime, timedelta
 from typing import Set
 
 import beem
 from beem.account import Account
 
 from config import Config
+from podping_hivewatcher import __version__
 
 
 class Pings:
@@ -277,7 +278,9 @@ def main() -> None:
 
     """ do we want periodic reports? """
     if Config.show_reports:
+        logging.info(f"Starting up podping-hivewatcher version: {__version__}")
         if Config.use_test_node:
+
             logging.info("---------------> Using Test Node " + Config.TEST_NODE[0])
         else:
             logging.info("---------------> Using Main Hive Chain ")

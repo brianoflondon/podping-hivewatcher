@@ -1,16 +1,15 @@
 import argparse
-from datetime import datetime, timedelta
 import os
-
+from datetime import datetime, timedelta
+from ipaddress import AddressValueError, IPv4Address, IPv6Address
+from socket import AF_INET, SOCK_STREAM, socket
 
 import beem
-from beem.blockchain import Blockchain
-from beem.block import Block
-from socket import AF_INET, SOCK_STREAM, socket
-from ipaddress import IPv4Address, IPv6Address, AddressValueError
-
 import zmq
+from beem.block import Block
+from beem.blockchain import Blockchain
 
+from podping_hivewatcher import __version__
 
 TEST_NODE = ["https://testnet.openhive.network"]
 

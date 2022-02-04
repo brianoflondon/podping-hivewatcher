@@ -412,6 +412,14 @@ optional = false
 python-versions = "*"
 
 [[package]]
+name = "single-source"
+version = "0.2.0"
+description = "Access to the project version in Python code for PEP 621-style projects"
+category = "main"
+optional = false
+python-versions = ">=3.6,<4.0"
+
+[[package]]
 name = "six"
 version = "1.16.0"
 description = "Python 2 and 3 compatibility utilities"
@@ -472,7 +480,7 @@ test = ["websockets"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "96b53f6a23f7737c0686d453a0c9bb000bf47eeba2e8beb5ff33e38d62774be1"
+content-hash = "e472454702e8de4511f2eb95bc2a4c013296161bd82dcec877b62d9c240e2bfa"
 
 [metadata.files]
 appdirs = [
@@ -819,6 +827,10 @@ scrypt = [
     {file = "scrypt-0.8.19-cp39-cp39-win32.whl", hash = "sha256:c15d1b44ab05feb5e09c81b09d1ca7bbddf00be596b2b2f8bd0a3f07ea9ed35a"},
     {file = "scrypt-0.8.19-cp39-cp39-win_amd64.whl", hash = "sha256:0a8bf767cf1dd565d7c094ab43d1ef0acdfe78a786d31ca14f1583e1ca563dc6"},
     {file = "scrypt-0.8.19.tar.gz", hash = "sha256:ad143035ae0cf5e97c4b399f4e4686adf442c5f0f06f9f198a0cc6c091335fb7"},
+]
+single-source = [
+    {file = "single-source-0.2.0.tar.gz", hash = "sha256:f40f94c7f2e72c854b9c0c6f7d6b545d74ada9ebd454f9f07f8fb743b22bccf5"},
+    {file = "single_source-0.2.0-py3-none-any.whl", hash = "sha256:82c55b00515a30c8f7c262b986a399ca023911ebb6a86f0953d4c50448c36b16"},
 ]
 six = [
     {file = "six-1.16.0-py2.py3-none-any.whl", hash = "sha256:8abb2f1d86890a2dfb989f9a77cfcfd3e47c2a354b01111771326f8aa26e0254"},
