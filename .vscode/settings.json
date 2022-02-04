@@ -5,12 +5,17 @@
     "python.linting.flake8Args": [
         "--max-line-length=88"
     ],
-    "python.testing.pytestArgs": [
-        "tests"
-    ],
     "python.testing.unittestEnabled": false,
     "python.testing.pytestEnabled": true,
     "python.analysis.extraPaths": [
         "./src/podping_hivewatcher"
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#053519",
+        "titleBar.activeBackground": "#074B24",
+        "titleBar.activeForeground": "#EFFEF5"
+    },
+    "python.testing.pytestArgs": [
+        "."
     ]
 }

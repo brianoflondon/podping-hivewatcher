@@ -9,8 +9,6 @@ import zmq
 from beem.block import Block
 from beem.blockchain import Blockchain
 
-from podping_hivewatcher import __version__
-
 TEST_NODE = ["https://testnet.openhive.network"]
 
 app_description = """PodPing - Watch the Hive Blockchain for notifications of new
@@ -28,7 +26,7 @@ This interval can be set with the --reports command line.
 """
 
 my_parser = argparse.ArgumentParser(
-    prog="hive-watcher",
+    prog="hivewatcher",
     usage="%(prog)s [options]",
     description=app_description,
     epilog="",
