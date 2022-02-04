@@ -1,8 +1,8 @@
 import argparse
 from datetime import datetime, timedelta
 import os
-from sys import flags
-from typing import Tuple
+
+
 import beem
 from beem.blockchain import Blockchain
 from beem.block import Block
@@ -10,7 +10,7 @@ from socket import AF_INET, SOCK_STREAM, socket
 from ipaddress import IPv4Address, IPv6Address, AddressValueError
 
 import zmq
-from zmq.sugar.frame import Message
+
 
 TEST_NODE = ["https://testnet.openhive.network"]
 
@@ -138,7 +138,10 @@ group_zmq_socket.add_argument(
     required=False,
     metavar="",
     default=None,
-    help="<IP-Address>:<port> for ZMQ to send each new url to (if no IP given, defaults to 127.0.0.1)",
+    help=(
+        "<IP-Address>:<port> for ZMQ to send each new url to "
+        "(if no IP given, defaults to 127.0.0.1)"
+    ),
 )
 
 my_parser.add_argument(
@@ -210,7 +213,7 @@ class Config:
             # cls.zsocket.RCV = 1000 # in milliseconds
             try:
                 cls.zsocket.send_string(url, flags=zmq.NOBLOCK)
-                msg = cls.zsocket.recv_string()
+                cls.zsocket.recv_string()
             except Exception as ex:
                 print(f"Exception: {ex}")
 

@@ -1,6 +1,6 @@
 import json
 import logging
-from datetime import datetime, time, timedelta
+from datetime import datetime, timedelta
 import sys
 from typing import Set
 
@@ -118,7 +118,8 @@ def output_diagnostic(post: dict) -> None:
     if Config.diagnostic:
         logging.info(
             f"Diagnostic | {post.get('timestamp')} "
-            f"| {data.get('server_account')} | {post.get('trx_id')} | {data.get('message')}"
+            f"| {data.get('server_account')} | "
+            f"{post.get('trx_id')} | {data.get('message')}"
         )
         logging.info(json.dumps(data, indent=2))
 
@@ -269,7 +270,7 @@ def scan_chain(history: bool):
 def main() -> None:
     logging.basicConfig(
         level=logging.INFO,
-        format=f"%(asctime)s | %(levelname)s %(name)s %(threadName)s : |  %(message)s",
+        format="%(asctime)s | %(levelname)s %(name)s %(threadName)s : |  %(message)s",
         datefmt="%Y-%m-%dT%H:%M:%S%z",
     )
     Config.setup()

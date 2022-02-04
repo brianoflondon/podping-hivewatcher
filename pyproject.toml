@@ -11,6 +11,8 @@ pyzmq = "^22.3.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
+black = "^22.1.0"
+flake8 = "^4.0.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
