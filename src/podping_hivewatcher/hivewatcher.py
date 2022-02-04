@@ -7,7 +7,7 @@ from typing import Set
 import beem
 from beem.account import Account
 
-from config import Config
+from podping_hivewatcher.config import Config
 from podping_hivewatcher import __version__
 
 
