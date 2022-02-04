@@ -2,5 +2,12 @@
     "python.linting.banditEnabled": false,
     "python.linting.enabled": true,
     "python.linting.flake8Enabled": true,
-    "python.linting.flake8Args": ["--max-line-length=88"]
+    "python.linting.flake8Args": [
+        "--max-line-length=88"
+    ],
+    "python.testing.pytestArgs": [
+        "tests"
+    ],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
 }

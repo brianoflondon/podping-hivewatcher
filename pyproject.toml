@@ -1,8 +1,11 @@
 [tool.poetry]
 name = "podping-hivewatcher"
 version = "0.1.0"
+license = "MIT"
 description = ""
 authors = ["Brian of London <brian@podping.org>"]
+readme="README.md"
+keywords = ["hive", "blockchain", "podping", "podcasting20"]
 
 [tool.poetry.dependencies]
 python = "^3.8"
