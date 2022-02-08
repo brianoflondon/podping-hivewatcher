@@ -15,11 +15,16 @@ single-source = "^0.2.0"
 argparse = "^1.4.0"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
 black = "^22.1.0"
 flake8 = "^4.0.1"
 single-source = "^0.2.0"
+pytest = "^7.0.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests",
+]
