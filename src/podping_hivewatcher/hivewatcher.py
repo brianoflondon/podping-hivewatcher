@@ -7,8 +7,8 @@ from typing import Set
 import beem
 from beem.account import Account
 
-from podping_hivewatcher.config import Config
 from podping_hivewatcher import __version__
+from podping_hivewatcher.config import Config
 
 
 class Pings:
@@ -269,11 +269,6 @@ def scan_chain(history: bool):
 
 
 def main() -> None:
-    logging.basicConfig(
-        level=logging.INFO,
-        format="%(asctime)s | %(levelname)s %(name)s %(threadName)s : |  %(message)s",
-        datefmt="%Y-%m-%dT%H:%M:%S%z",
-    )
     Config.setup()
 
     """ do we want periodic reports? """

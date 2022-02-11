@@ -1,4 +1,5 @@
 import argparse
+import logging
 import os
 from datetime import datetime, timedelta
 from ipaddress import AddressValueError, IPv4Address, IPv6Address
@@ -217,6 +218,12 @@ class Config:
     @classmethod
     def setup(cls):
         """Setup the config"""
+        logging.getLogger("beemapi.graphenerpc").setLevel(logging.CRITICAL)
+        logging.basicConfig(
+            level=logging.INFO,
+            format="%(asctime)s | %(levelname)s %(name)s %(threadName)s : |  %(message)s",
+            datefmt="%Y-%m-%dT%H:%M:%S%z",
+        )
         if cls.test:
             cls.use_test_node = True
         else:
