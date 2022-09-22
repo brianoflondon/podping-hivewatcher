@@ -1,6 +1,7 @@
 import json
 import logging
 import sys
+import uuid
 from datetime import datetime, timedelta
 from typing import Set
 
@@ -85,6 +86,9 @@ def output(post) -> int:
             Config.zsocket_send(data.get("url"))
         elif data.get("urls"):
             for url in data.get("urls"):
+                # rand_uuid = str(uuid.uuid4())
+                # bulkup = f"https://example.com?s={rand_uuid}"
+                # Config.zsocket_send(bulkup)
                 Config.zsocket_send(url)
 
     data["required_posting_auths"] = post.get("required_posting_auths")

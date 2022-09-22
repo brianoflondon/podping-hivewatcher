@@ -170,7 +170,7 @@ class Config:
 
     WATCHED_OPERATION_IDS = ["pp_", "podping"]
     DIAGNOSTIC_OPERATION_IDS = ["podping-startup", "pp_startup"]
-    TEST_NODE = ["https://testnet.openhive.network"]
+    TEST_NODE = ["https://api.fake.openhive.network"]
 
     test = my_args["test"]
     quiet = my_args["quiet"]
