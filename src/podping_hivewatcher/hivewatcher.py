@@ -13,7 +13,9 @@ from podping_hivewatcher.config import Config
 
 
 class Pings:
+    start_time = None
     total_pings = 0
+    total_bytes = 0
 
 
 class UnspecifiedHiveException(Exception):
@@ -38,6 +40,12 @@ def allowed_op_id(operation_id: str) -> bool:
     for id in Config.WATCHED_OPERATION_IDS:
         if operation_id.startswith(id):
             return True
+
+
+def post_bytes(post: dict) -> int:
+    if post.get("json"):
+        return len(bytes(post.get("json"), "utf-8"))
+    return 0
 
 
 def output(post) -> int:
@@ -99,10 +107,15 @@ def output(post) -> int:
     if Config.use_test_node:
         data["test_node"] = True
 
+    p_bytes = post_bytes(post)
+    logging.info(
+        f"Trx details | {data.get('trx_id')} | {p_bytes:>10,}"
+        f" | {data['required_posting_auths']}"
+    )
     if data.get("url"):
         logging.info(
-            f"Feed Updated | {data.get('timestamp')} | {data.get('trx_id')} "
-            f"| {data.get('url')} | {data['required_posting_auths']}"
+            f"Feed Updated | {data.get('timestamp')} "
+            f"| {data.get('url')[:59]:<60} | {data['required_posting_auths']}"
             f" | {data['medium_reason']}"
         )
         count = 1
@@ -110,8 +123,8 @@ def output(post) -> int:
         for url in data.get("urls"):
             count += 1
             logging.info(
-                f"Feed Updated | {data.get('timestamp')} | {data.get('trx_id')}"
-                f" | {url} | {data['required_posting_auths']}"
+                f"Feed Updated | {data.get('timestamp')} "
+                f" | {url[:59]:<60} | {data['required_posting_auths']}"
                 f" | {data['medium_reason']}"
             )
     return count
@@ -140,10 +153,13 @@ def output_status(
     if not Config.reports and Config.quiet:
         return None
     if time_to_now:
+        run_time = datetime.utcnow() - Pings.start_time
+        kb_per_hour = round((Pings.total_bytes / 1024) / (run_time.seconds / 3600))
         logging.info(
-            f"{timestamp} | Podpings: {pings:7} / {Pings.total_pings:10} | Count:"
-            f" {count_posts:12} | BlockNum: {current_block_num} | Time Delta:"
-            f" {time_to_now}"
+            f"{timestamp} | Podpings: {pings:7} / {Pings.total_pings:10} | "
+            f"Count: {count_posts:12} | Bytes: {Pings.total_bytes:10,} | "
+            f"KB/hr: {kb_per_hour:5,} | "
+            f"BlockNum: {current_block_num} | Time Delta: {time_to_now}"
         )
     else:
         logging.info(
@@ -212,6 +228,8 @@ def scan_chain(history: bool):
     try:
         for post in stream:
             post_time = post["timestamp"].replace(tzinfo=None)
+            if not Pings.start_time:
+                Pings.start_time = post_time
             time_dif = post_time - report_period_start_time
             time_to_now = datetime.utcnow() - post_time
             count_posts += 1
@@ -233,6 +251,8 @@ def scan_chain(history: bool):
                     count = output(post)
                     pings += count
                     Pings.total_pings += count
+                    p_bytes = post_bytes(post)
+                    Pings.total_bytes += p_bytes
 
             if Config.diagnostic:
                 if post["id"] in list(Config.DIAGNOSTIC_OPERATION_IDS):
@@ -274,7 +294,6 @@ def scan_chain(history: bool):
 
 def main() -> None:
     Config.setup()
-
     """ do we want periodic reports? """
     if Config.show_reports:
         logging.info(f"Starting up podping-hivewatcher version: {__version__}")
